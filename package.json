@@ -1,0 +1,18 @@
+{
+  "name": "content",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "app": "node index.js"
+  },
+  "author": "",
+  "license": "NONE",
+  "dependencies": {
+    "web3": "~0.7.1",
+    "ipfs-api": "~1.1.8",
+    "coffee-script": "~1.9.3",
+    "mkdirp": "~0.5.1"
+  }
+}
