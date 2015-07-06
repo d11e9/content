@@ -15,7 +15,7 @@ EXPOSE 4001
 
 RUN npm install -g go-ipfs
 RUN ipfs init
-RUN npm install
+# RUN npm install
 
 COPY ./ /var/app/
 

@@ -45,7 +45,8 @@ class Post
             @link = msg.payload.link or null
             @error = false
         else
-            console.log "Unable to construct invalid post", @validationError( msg )
+            console.log "Unable to construct invalid post: " + @validationError( msg )
+            @error = true
 
 
     validationError: (msg) ->
@@ -64,6 +65,9 @@ class Post
 
         contentBuffer = new Buffer( @link or @content )
         titleBuffer = new Buffer( @title )
+
+        return unless @link or @content
+        return unless @title
 
         ipfs.add [ contentBuffer ], (err,files) ->
             pathName = path.join( CONTENT_PATH, '/posts/', files[0].Hash )
