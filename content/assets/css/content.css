@@ -123,9 +123,9 @@ a:visited {
 #content {
 	width: 70vw;
 	margin: 0;
-	padding: 0;
-	list-style: none;
 	box-sizing: border-box;
+	list-style: none;
+	padding: 0;
 	position: absolute;
 	left: 0;
 	right: 30vw;
@@ -134,7 +134,13 @@ a:visited {
 }
 
 #content li {
+	font-size: 1.2em;
 	padding: 0.6em;
 	border-bottom: 1px solid black;
+}
+
+#content li:before {
+	content: attr(data-index);
+	margin-right: 1em;
 }
 

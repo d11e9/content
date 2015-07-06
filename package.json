@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "eth": "geth --networkid 89898989 --datadir './.eth' --rpc --shh --rpccorsdomain '*' --rpcapi 'shh,eth,web3' --nodiscover --nat none --port 9092",
     "app": "bash run.sh"
   },
   "author": "",

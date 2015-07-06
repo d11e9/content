@@ -1,10 +1,24 @@
 $(function(){
 
-	var CONTENT_CHANNEL = '/content';
+    var CONTENT_CHANNEL = '/content';
+    var $content = $('#content');
     var ethHost = 'localhost';
     var ethPort = 8545;
 
-	console.log("content init")
+    console.log("content init")
+
+    function refreshPosts( newRoot ) {
+        var path = 'posts/';
+        if (newRoot) path = '/ipfs/' + newRoot + '/' + path;
+
+        $.getJSON( path + 'index.json', function(posts, status, xhr) {
+            $content.empty();
+            console.log( "Loaded posts:", posts )
+            posts.map( function(post, index) {
+                $content.append( $('<li data-index='+index+' id="'+post+'"/>').load( path + post + '/title' ) )
+            });
+        });
+    }
 
 
     var config,$config = $('<div id="content-config"/>')
@@ -26,7 +40,7 @@ $(function(){
         var identity = web3.shh.newIdentity()
         var messageFilter = web3.shh.filter( { topics: [CONTENT_CHANNEL] } )
 
-        $( "#content" ).load( 'posts' );
+        refreshPosts( null )
 
         $('#createPost').click( function(){
             var content = prompt( "Enter post content: " )
@@ -48,7 +62,7 @@ $(function(){
             if (!err && msg) console.log( "Message: ",  JSON.stringify( msg ) );
             if (!err && msg && msg.payload && msg.payload.root) {
                 console.log( "Received root hash update: ", msg )
-                $( "#content" ).load( '/ipfs/' + msg.payload.root + '/posts' );
+                refreshPosts( msg.payload.root )
             } 
         })
 

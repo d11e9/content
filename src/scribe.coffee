@@ -12,11 +12,11 @@ CONTENT_CHANNEL = '/content'
 CONTENT_PATH = path.join __dirname, "../content"
 WHISPER_ID = undefined
 
-ETH_HOST = process.env.ETH_PORT_8545_TCP_ADDR
-ETH_PORT = process.env.ETH_PORT_8545_TCP_PORT
+ETH_HOST = process.env.ETH_PORT_8545_TCP_ADDR or 'localhost'
+ETH_PORT = process.env.ETH_PORT_8545_TCP_PORT or 8545
 
-IPFS_HOST = 'localhost' # process.env.IPFS_PORT_5001_TCP_ADDR
-IPFS_PORT = 5001        #process.env.IPFS_PORT_5001_TCP_PORT
+IPFS_HOST = process.env.IPFS_PORT_5001_TCP_ADDR or 'localhost'
+IPFS_PORT = process.env.IPFS_PORT_5001_TCP_PORT or 5001
 
 
 recenthash = null
@@ -63,17 +63,23 @@ class Post
             console.log @
             return
 
-        contentBuffer = new Buffer( @link or @content )
-        titleBuffer = new Buffer( @title )
-
         return unless @link or @content
         return unless @title
 
+        contentBuffer = new Buffer( @link or @content )
+        titleBuffer = new Buffer( @title )
+
+
         ipfs.add [ contentBuffer ], (err,files) ->
             pathName = path.join( CONTENT_PATH, '/posts/', files[0].Hash )
+
+            # Early out if this hash exists already.
+            return if fs.existsSync( pathName )
+            
             mkdirp pathName, (err) ->
                 throw err if err
                 console.log "made new post folder"
+                
                 fs.writeFile path.join( pathName, './content' ), contentBuffer, (err) ->
                     throw err if err
                     console.log "written content"
@@ -99,6 +105,12 @@ updateContent = ->
         unless recenthash
             console.log "IPFS id: ", info.ID
             console.log "IPFS path: ", CONTENT_PATH
+
+        postsPath = path.join( CONTENT_PATH, './posts' )
+        postsRaw = fs.readdirSync( postsPath )
+        posts = postsRaw.filter (p) -> p != 'index.json'
+        fs.writeFileSync( path.join( postsPath, './index.json') , JSON.stringify( posts ) )
+        console.log( "Updated posts index.json (#{ posts.length })" )
 
         exec "ipfs add -r -q #{ CONTENT_PATH }", (err,stdout,stderr) ->
             console.log err if err
