@@ -6,22 +6,33 @@ mkdirp = require 'mkdirp'
 web3 = require 'web3'
 child_process = require 'child_process'
 exec = child_process.exec
+spawn = child_process.spawn
 
 CONTENT_CHANNEL = '/content'
 CONTENT_PATH = path.join __dirname, "../content"
 WHISPER_ID = undefined
+
+ETH_HOST = process.env.ETH_PORT_8545_TCP_ADDR
+ETH_PORT = process.env.ETH_PORT_8545_TCP_PORT
+
+IPFS_HOST = 'localhost' # process.env.IPFS_PORT_5001_TCP_ADDR
+IPFS_PORT = 5001        #process.env.IPFS_PORT_5001_TCP_PORT
+
 
 recenthash = null
 
 console.log "Initializing /content scribe..."
 console.log "Channel: #{ CONTENT_CHANNEL }"
 
-ipfs = new ipfsApi()
-httpProvider = new web3.providers.HttpProvider()
+
+ipfs = new ipfsApi( IPFS_HOST, IPFS_PORT )
+httpProvider = new web3.providers.HttpProvider( "http://#{ ETH_HOST }:#{ ETH_PORT }" )
+
 web3.setProvider( httpProvider )
 
 
 console.log "Eth provider: #{ web3.currentProvider.host }"
+console.log "IPFS provider: http://#{ IPFS_HOST }:#{ IPFS_PORT }"
 
 
 class Post
