@@ -1,0 +1,11 @@
+{
+    "app": "/content",
+    "ipfs": {
+        "id": "<todo>"
+    },
+    "defaults": {
+        "eth_port": 8545,
+        "eth_host": "localhost",
+        "shh_channel": "/content"
+    }
+}
