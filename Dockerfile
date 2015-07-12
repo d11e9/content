@@ -9,8 +9,8 @@ WORKDIR /var/app
 COPY ./package.json /var/app/
 
 ENV VIRTUAL_HOST content.datagotchi.com
-ENV VIRTUAL_PORT 8082
-EXPOSE 8082
+ENV VIRTUAL_PORT 6002
+EXPOSE 6002
 EXPOSE 4001
 
 RUN npm install -g go-ipfs

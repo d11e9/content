@@ -2,3 +2,4 @@ node_modules
 .eth
 *.log
 .DS_Store
+content/posts

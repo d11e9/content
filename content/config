@@ -4,8 +4,8 @@
         "id": "<todo>"
     },
     "defaults": {
-        "eth_port": 8545,
-        "eth_host": "localhost",
+        "eth_port": 80,
+        "eth_host": "eth.datagotchi.com",
         "shh_channel": "/content"
     }
 }

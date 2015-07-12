@@ -1,0 +1,185 @@
+@import 'colors';
+
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: monospace;
+	overflow: auto;
+}
+
+a {
+	color: @text-color-cta;
+
+    &:visited {
+        color: @text-color-cta;
+    }
+}
+
+#branding {
+	padding: 1em 1em 3em 2em;
+ 	background-color: @bg-color;
+	height: 6em;
+
+    a {
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+
+        h1 {
+            line-height: 0.8em;
+        }
+
+        img {
+            height: 4em;
+            float: left;
+        }
+    }
+
+    p {
+        padding-left: 0.65em;
+    }
+}
+
+
+#links {
+	float: right;
+	overflow: auto;
+	width: 10em;
+	margin: 0;
+	padding: 2em;
+}
+
+
+
+#tabs {
+    background-color: @bg-color;
+	border-bottom: 1px solid black;
+	clear: left;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	overflow: auto;
+
+    li {
+        float: left;
+        padding: 0.4em 1em;
+        border: 1px solid #000;
+        margin: 0 0.5em;
+        position: relative;
+        overflow: visible;
+        border-bottom: 0 none;
+        background-color: rgba(255,255,255, 0.5);
+
+        &.selected {
+            background-color: white;
+        }
+    }
+}
+
+
+
+
+
+#network {
+	float: right;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	overflow: auto;
+	margin-top: -2.1em;
+
+    li {
+        float: left;
+        padding: 0.4em 1em;
+        border: 1px solid #000;
+        margin: 0 0.5em;
+        position: relative;
+        overflow: visible;
+        border-bottom: 0 none;
+        background-color: white;
+        border-bottom: 1px solid black;
+        background-color: #9896BF;
+        color: white;
+        border: 0 none;
+    }
+
+    #eth-status,
+    #ipfs-status {
+        display: inline-block;
+        height: 1em;
+        width: 1em;
+        border-radius: 0.5em;
+        background-color: red;
+        color: transparent;
+
+        &.connected,
+        &.connected {
+            background-color: orange;
+        }
+    }
+}
+
+#meta {
+	padding: 1em;
+	background-color: white;
+	box-sizing: border-box;
+
+    #postContent {
+        .title,
+        .content {
+            display: block;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+
+        .content {
+            height: 5em;
+        }
+    }
+}
+
+
+
+
+#content {
+	margin: 0;
+	box-sizing: border-box;
+	list-style: none;
+	padding: 0;
+
+    li {
+        font-size: 1.2em;
+        padding: 0.6em;
+        border-bottom: 1px solid black;
+
+        &:before {
+            content: attr(data-index);
+            margin-right: 1em;
+            font-size: 1.2em;
+            color: rgba(0,0,0,0.25);
+        }
+
+        .title {
+            margin-right: 1em;
+        }
+
+        .content {
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        .comments {
+            font-size: 0.8em;
+            text-decoration: none;
+        }
+
+        .score {
+            margin-right: 1em;
+
+            a {
+                text-decoration: none;
+            }
+        }
+    }
+}

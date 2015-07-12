@@ -1,0 +1,92 @@
+{
+  "name": "web3",
+  "namespace": "ethereum",
+  "version": "0.7.1",
+  "description": "Ethereum JavaScript API, middleware to talk to a ethereum node over RPC",
+  "main": "./index.js",
+  "directories": {
+    "lib": "./lib"
+  },
+  "dependencies": {
+    "bignumber.js": "debris/bignumber.js#master",
+    "crypto-js": "^3.1.4",
+    "xmlhttprequest": "*"
+  },
+  "browser": {
+    "xmlhttprequest": "./lib/utils/browser-xhr.js"
+  },
+  "devDependencies": {
+    "bower": ">=1.4.1",
+    "browserify": ">=10.0",
+    "chai": "^3.0.0",
+    "coveralls": "^2.11.2",
+    "del": ">=1.2.0",
+    "exorcist": "^0.4.0",
+    "gulp": ">=3.9.0",
+    "gulp-jshint": ">=1.5.0",
+    "gulp-rename": ">=1.2.0",
+    "gulp-replace": "^0.5.3",
+    "gulp-streamify": "0.0.5",
+    "gulp-uglify": ">=1.2.0",
+    "istanbul": "^0.3.5",
+    "jshint": ">=2.5.0",
+    "mocha": ">=2.1.0",
+    "sandboxed-module": "^2.0.2",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "scripts": {
+    "build": "gulp",
+    "watch": "gulp watch",
+    "lint": "jshint *.js lib",
+    "test": "mocha",
+    "test-coveralls": "istanbul cover _mocha -- -R spec && cat coverage/lcov.info | coveralls --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ethereum/web3.js.git"
+  },
+  "homepage": "https://github.com/ethereum/web3.js",
+  "bugs": {
+    "url": "https://github.com/ethereum/web3.js/issues"
+  },
+  "keywords": [
+    "ethereum",
+    "javascript",
+    "API"
+  ],
+  "author": {
+    "name": "ethdev.com"
+  },
+  "authors": [
+    {
+      "name": "Jeffery Wilcke",
+      "email": "jeff@ethdev.com",
+      "url": "https://github.com/obscuren"
+    },
+    {
+      "name": "Marek Kotewicz",
+      "email": "marek@ethdev.com",
+      "url": "https://github.com/debris"
+    },
+    {
+      "name": "Marian Oancea",
+      "email": "marian@ethdev.com",
+      "url": "https://github.com/cubedro"
+    },
+    {
+      "name": "Fabian Vogelsteller",
+      "email": "fabian@frozeman.de",
+      "homepage": "http://frozeman.de"
+    },
+    {
+      "name": "Gav Wood",
+      "email": "g@ethdev.com",
+      "homepage": "http://gavwood.com"
+    }
+  ],
+  "license": "LGPL-3.0",
+  "readme": "# Ethereum JavaScript API\n\n[![Join the chat at https://gitter.im/ethereum/web3.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ethereum/web3.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n\nThis is the Ethereum compatible [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API)\nwhich implements the [Generic JSON RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC) spec. It's available on npm as a node module, for bower and component as an embeddable js and as a meteor.js package.\n\n[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![dependency status][dep-image]][dep-url] [![dev dependency status][dep-dev-image]][dep-dev-url][![Coverage Status][coveralls-image]][coveralls-url][![Stories in Ready][waffle-image]][waffle-url]\n\n<!-- [![browser support](https://ci.testling.com/ethereum/ethereum.js.png)](https://ci.testling.com/ethereum/ethereum.js) -->\n\nYou need to run a local ethrereum node to use this library.\n\n[Documentation](https://github.com/ethereum/wiki/wiki/JavaScript-API)\n\n## Installation\n\n### Node.js\n\n    $ npm install web3\n\n### Meteor.js\n\n    $ meteor add ethereum:web3\n\n### As Browser module\nBower\n\n\t$ bower install web3\n\nComponent\n\n\t$ component install ethereum/web3.js\n\n* Include `ethereum.min.js` in your html file. (not required for the meteor package)\n* Include [bignumber.js](https://github.com/MikeMcl/bignumber.js/) (not required for the meteor package)\n\n## Usage\nUse the `web3` object directly from global namespace:\n\n\tconsole.log(web3); // {eth: .., shh: ...} // it's here!\n\nSet a provider (QtSyncProvider, HttpProvider)\n\n\tweb3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));\n\nThere you go, now you can use it:\n\n```\nvar coinbase = web3.eth.coinbase;\nvar balance = web3.eth.getBalance(coinbase);\n```\n\n\nFor another example see `example/index.html`.\n\n\n## Contribute!\n\n### Requirements\n\n* Node.js\n* npm\n\n```bash\nsudo apt-get update\nsudo apt-get install nodejs\nsudo apt-get install npm\nsudo apt-get install nodejs-legacy\n```\n\n### Building (gulp)\n\n```bash\nnpm run-script build\n```\n\n\n### Testing (mocha)\n\n```bash\nnpm test\n```\n\n### Testing (karma)\nKarma allows testing within one or several browsers.\n\n```bash\nnpm run-script karma # default browsers are Chrome and Firefox\nnpm run-script karma -- --browsers=\"Chrome,Safari\" # custom browsers\n```\n\n\n**Please note this repo is in it's early stage.**\n\nIf you'd like to run a Http ethereum node check out\n[cpp-ethereum](https://github.com/ethereum/cpp-ethereum).\n\nInstall ethereum and spawn a node:\n\n```\neth -j\n```\n\n[npm-image]: https://badge.fury.io/js/web3.png\n[npm-url]: https://npmjs.org/package/web3\n[travis-image]: https://travis-ci.org/ethereum/web3.js.svg\n[travis-url]: https://travis-ci.org/ethereum/web3.js\n[dep-image]: https://david-dm.org/ethereum/web3.js.svg\n[dep-url]: https://david-dm.org/ethereum/web3.js\n[dep-dev-image]: https://david-dm.org/ethereum/web3.js/dev-status.svg\n[dep-dev-url]: https://david-dm.org/ethereum/web3.js#info=devDependencies\n[coveralls-image]: https://coveralls.io/repos/ethereum/web3.js/badge.svg?branch=master\n[coveralls-url]: https://coveralls.io/r/ethereum/web3.js?branch=master\n[waffle-image]: https://badge.waffle.io/ethereum/web3.js.svg?label=ready&title=Ready\n[waffle-url]: http://waffle.io/ethereum/web3.js\n\n",
+  "readmeFilename": "README.md",
+  "_id": "web3@0.7.1",
+  "_from": "web3@~0.7.1"
+}

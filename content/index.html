@@ -4,6 +4,7 @@
 		<title>content</title>
 		<link rel="stylesheet" href="assets/css/content.css" />
 		<link rel="icon" href="assets/img/content.png" type="image/png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 	<body>
 
@@ -22,16 +23,13 @@
 		</div>
 
 		<ul id="tabs">
-			<li class="selected"><a href="#">All Subs</a></li>
+			<li class="selected"><a href="#">All</a></li>
 			<li><a href="#">Frontpage</a></li>
 			<li><a href="#">New</a></li>
-			<li><a href="#">Rising</a></li>
-			<li><a href="#">Controvertial</a></li>
-			<li><a href="#">Top</a></li>
 		</ul>
 
 		<ul id="network">
-			<li>ipfs: <span class="ipfs-status">ok</span> eth: <span class="eth-status">ok</span></li>
+			<li>ipfs: <span id="ipfs-status">...</span> eth: <span id="eth-status">...</span></li>
 		</ul>
 
 
@@ -39,19 +37,40 @@
 			<h1>/content</h1>
 			<div>status: <span class="status">ok</span>; ~<span class="viewers">0</span> users here now</div>
 			<p>More about this sub</p>
-
-			<button>Submit a link</button>
-
-			<button id="createPost">Submit a new text post</button>
+			<button id="createPost">Submit new content</button>
+            <div id="postContent"></div>
 		</div>
 
 		<ul id="content">
-			<li>...</li>
+            <li class="loading">Loading...</li>
 		</ul>
 
 		<script src="assets/js/web3.js"></script>
 		<script src="assets/js/jquery-2.1.4.min.js"></script>
 		<script src="assets/js/content.js"></script>
+
+        <script id="post-template" type="html/template">
+            <li class="post" data-index="">
+                <span class="score">
+                    <a class="upvote" href="#" title="Up Vote this content"><i class="fa-caret-up">&#9650;</i></a>
+                    <span class="score-count">0</span>
+                    <a class="downvote" href="#" title="Down Vote this content"><i class="fa-caret-down">&#9660;</i></a>
+                </span>
+                <a class="content" href="#{{content-link}}" title="View content">
+                    <span class="title">Loading title</span>
+                </a>
+                <a class="comments" href="#{{comments-link}}" title="View comments">
+                    (<span class="comment-count">0</span> <span>comments</span>)
+                </a>
+                <a class="comment" href="#">add comment</a>
+            </li>
+        </script>
+
+        <script id="postContent-template" type="html/template">
+            <input class="title" type="text" placeholder="Title"/>
+            <textarea class="content" placeholder="Content"/>
+            <button class="submit">Submit</button>
+        </script>
 
 
 	</body>
