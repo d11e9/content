@@ -8,7 +8,7 @@ WORKDIR /var/app
 
 COPY ./package.json /var/app/
 
-ENV VIRTUAL_HOST content.datagotchi.com
+ENV VIRTUAL_HOST example.com
 ENV VIRTUAL_PORT 6002
 EXPOSE 6002
 EXPOSE 4001
